@@ -1,2 +1,7 @@
-# ShopV1-S20-Team5
-Proyecto del curso de MinTIC 2021 - S20, Grupo 5.
+# Proyecto Tienda Virtual
+
+Solución de TI para llevar adecuadamente el registro de los ingresos y gastos, además de fijar un control de inventarios para una Tienda de Barrio.
+
+Proyecto realizado en el programa **Misión TIC 2022 de MinTIC.**
+Con asociación con la **Universidad Industrial de Santander UIS.**
+**2021**
