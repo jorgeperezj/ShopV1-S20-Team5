@@ -16,6 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from laTiendaVitual import views as local_views
+from categorias.views import indexCategoria, editarCategoria
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('categorias/', indexCategoria, name='index'),
+    path('categorias/edit/<int:id>/', editarCategoria, name='edit'),
 ]
