@@ -1,9 +1,9 @@
 {% extends 'template.html' %}
-{% block title %}Editar Categoría{% endblock %}
+{% block title %}Crear Categoría{% endblock %}
 
 {% block content %}
 	<div class="mt-5">
-		<h2>Editar categoría</h2>
+		<h2>Crear categoría</h2>
 	</div>
 	<form method="POST">
 		{% csrf_token %}
@@ -15,9 +15,9 @@
 		</div>
 
 		<div class="float-right">
-		    <a href="{% url 'indexCate' %}" class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
-		    <button type="submit" class="btn btn-primary">Actualizar</button>
+		    <a href="{% url 'indexCate' %}" type="button" class="btn btn-secondary">Cerrar</a>
+		    <button type="submit" class="btn btn-primary">Guardar</button>
 		</div>
 	</form>
-
+	
 {% endblock %}

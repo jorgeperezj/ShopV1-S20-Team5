@@ -6,24 +6,30 @@ from .forms import CategoriaForm
 
 
 def indexCategoria(request):
-	# Listar las categorías en el index y el formulario
 	categoria = Categoria.objects.all()
+	return render(request, 'categorias/index.html', {'categorias': categoria})
+
+
+def createCategoria(request):
 	form = CategoriaForm()
 
-	# Método de guardar la categoría
 	if request.method == 'POST':
 		form = CategoriaForm(request.POST)
 		if form.is_valid():
 			form.save()
-			return redirect('index')
-	
-	return render(request, 'categorias/index.html', {'categorias': categoria, 'forms': form})
+			return redirect('indexCate')
+
+	return render(request, 'categorias/create.html', {'forms':form})
 
 
-def editarCategoria(request, id):
+def editCategoria(request, id):
 	categoria = Categoria.objects.get(id = id)
-	formEdit = CategoriaForm(instance = categoria)
-	contexto = {
-		'formEdit': formEdit
-	}
-	return render(request, 'categorias/edit.html', formEdit)
+	if request.method == 'GET':
+		form = CategoriaForm(instance = categoria)
+	else:
+		form = CategoriaForm(request.POST, instance = categoria)
+		if form.is_valid():
+			form.save()
+			return redirect('indexCate')
+
+	return render(request, 'categorias/edit.html', {'forms':form})

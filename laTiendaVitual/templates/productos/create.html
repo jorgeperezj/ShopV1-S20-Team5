@@ -1,0 +1,21 @@
+{% extends 'template.html' %}
+{% block title %}Crear Producto{% endblock %}
+
+{% block content %}
+	<div class="mt-5">
+		<h2>Crear producto</h2>
+	</div>
+	<form method="POST">
+		{% csrf_token %}
+
+		<div class="form-group">
+			{{forms}}
+		</div>
+
+		<div class="float-right">
+		    <a href="{% url 'indexPro' %}" class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
+		    <button type="submit" class="btn btn-primary">Guardar</button>
+		</div>
+	</form>
+	
+{% endblock %}

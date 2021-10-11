@@ -1,103 +1,55 @@
-<div class="mt-5">
-    <div class="row">
-        <div class="col-lg-6">
-            <h2>Productos</h2>
-        </div>
-        <div class="col-lg-6">
-            <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Agregar</button>
-        </div>
-    </div>
-    <hr style="border: 1px #000 solid;" />
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Valor total inventario</th>
-                    <th scope="col">Categoría</th>
-                    <th scope="col">Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Dulces de caramelo con vainilla sabor a chocolate y galleta</td>
-                    <td>25</td>
-                    <td>$50.000</td>
-                    <td>Dulces de caramelo con vainilla sabor a chocolate y galleta</td>
-                    <td>
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="customSwitch4" />
-                            <label class="custom-control-label" for="customSwitch4"></label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>25</td>
-                    <td>$50.000</td>
-                    <td>Dulces de caramelo con vainilla sabor a chocolate y galleta</td>
-                    <td>
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="customSwitch5" />
-                            <label class="custom-control-label" for="customSwitch5"></label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>25</td>
-                    <td>$50.000</td>
-                    <td>Dulces de caramelo con vainilla sabor a chocolate y galleta</td>
-                    <td>
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="customSwitch6" />
-                            <label class="custom-control-label" for="customSwitch6"></label>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+{% extends 'template.html' %}
+{% block title %}Listado de productos{% endblock %}
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Crear Producto</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+{% block content %}
+    <div class="mt-5">
+
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Listado de productos</h2>
             </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="message-text" class="col-form-label">Nombre producto:</label>
-                        <textarea class="form-control" id="message-text"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Categoría:</label>
-                        <div class="form-group">
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>1. Dulces</option>
-                                <option>2. Frutas</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Guardar Producto</button>
+            <div class="col-lg-6">
+                <a href="{% url 'createPro' %}" type="button" class="btn btn-success float-right">
+                    Agregar
+                </a>
             </div>
         </div>
+
+        <hr style="border: 1px #000 solid;" />
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Categoría</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for producto in productos %}
+                        <tr>
+                            <th scope="row">{{ producto.id }}</th>
+                            <td>{{ producto.nombre }}</td>
+                            {% if producto.estado %}
+                                <td class="text-danger"><strong>Inactivo</strong></td>
+                            {% else %}
+                                <td class="text-success"><strong>Activo</strong></td>
+                            {% endif %}
+
+                            <td>{{ producto.categoria.nombre }}</td>
+                            <td>{{ producto.cantidad }}</td>
+                            <td>
+                                <a href="{% url 'editPro' producto.id %}" type="button" class="btn btn-warning">Editar</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
     </div>
-</div>
+{% endblock %}

@@ -17,10 +17,19 @@ from django.contrib import admin
 from django.urls import path
 
 from laTiendaVitual import views as local_views
-from categorias.views import indexCategoria, editarCategoria
+from categorias.views import indexCategoria, createCategoria, editCategoria
+from productos.views import indexProductos, createProducto, editProducto
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('categorias/', indexCategoria, name='index'),
-    path('categorias/edit/<int:id>/', editarCategoria, name='edit'),
+    path('', local_views.presentacion, name='presentacion'),
+
+    # Urls para categorias
+    path('categorias/', indexCategoria, name='indexCate'),
+    path('categorias/create', createCategoria, name='createCate'),
+    path('categorias/edit/<int:id>/', editCategoria, name='editCate'),
+    # Urls para productos
+    path('productos/', indexProductos, name='indexPro'),
+    path('productos/create', createProducto, name='createPro'),
+    path('productos/edit/<int:id>/', editProducto, name='editPro'),
 ]
